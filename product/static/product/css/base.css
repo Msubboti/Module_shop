@@ -1,0 +1,44 @@
+body,html{
+	background-color:yellow;
+	width: 100%;
+	height:100%;
+	margin:0;
+	background: rgb(2,0,36);
+    background: linear-gradient(0.25turn, #540383, #ce320b, #e9890b);
+}
+
+.container-fluid{
+	height: 100%;
+}
+
+
+.row{
+	width: 100%;
+}
+
+.product_characteristics{
+    white-space: pre-wrap;
+}
+
+#Header{
+    height:20%;
+}
+
+
+
+#body_page{
+    height:55%;
+}
+
+
+#item{
+    height:100%;
+}
+
+#Footer{
+    height:20%;
+}
+
+.whitespace-prewrap {
+    whitespace: prewrap;
+}

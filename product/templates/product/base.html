@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'product/css/base.css' %}">
+    <link rel="shortcut icon" href="{% static 'products/favicon.gif' %}" type="image/png">
+    <title>{% block title %}Start page{% endblock title %}</title>
+   </head>
+  <body>
+	<div class ="container-fluid">
+    	<div id = 'Header' class="row p-2">
+			<div class="col-sm-12">
+           {% block header%}
+            	{% lorem 1 p %}
+           {% endblock header %}
+			</div>
+		</div>
+		<div class="row" id="Horizontal_Navigation">
+			<nav class="nav nav-tabs flex-column flex-sm-row row justify-content-start">
+				{% block navigation %}
+				<a class="flex-sm-fill text-sm-center nav-link active" href="{% url 'Start Page' %}">Start page</a>
+				<a class="flex-sm-fill text-sm-center nav-link" href="#">Store promotions</a>
+				<a class="flex-sm-fill text-sm-center nav-link" href="#">Payment and Delivery</a>
+				<a class="flex-sm-fill text-sm-center nav-link" href="#">About us</a>
+				{% endblock navigation %}
+				{% if user.is_authenticated %}
+				<div class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
+					<div class="dropdown-menu">
+      					<a class="dropdown-item" href="{% url 'users:logout' %}">Logout</a>
+						<div class="dropdown-divider"></div>
+      					<a class="dropdown-item" href="#">Purchase</a>
+    				</div>
+				</div>
+				{% else %}
+				<div class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Members</a>
+					<div class="dropdown-menu">
+      					<a class="dropdown-item" href="{% url 'users:login' %}">Login</a>
+						<div class="dropdown-divider"></div>
+      					<a class="dropdown-item" href="{% url 'users:registration' %}">Registration</a>
+    				</div>
+				</div>
+				{% endif %}
+			</nav>
+		</div>
+		{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+					<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+		<div id="body_page" class="row">
+			<div id="Main_page" class="col-sm p-0 text-sm-end">
+        		{% block Main_page %}
+					{% lorem 1 p %}
+        		{% endblock Main_page %}
+			</div>
+		</div>
+		<div class="row p-2">
+			<div id = 'Footer' class="col-sm-12">
+            {% block footer%}
+            	{% lorem 1 p %}
+            {% endblock footer %}
+			</div>
+		</div>
+	</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
