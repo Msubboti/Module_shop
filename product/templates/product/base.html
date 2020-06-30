@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'product/css/base.css' %}">
-    <link rel="shortcut icon" href="{% static 'products/favicon.gif' %}" type="image/png">
+    <link rel="shortcut icon" href="{% static 'product/favicon.png' %}" type="image/png">
     <title>{% block title %}Start page{% endblock title %}</title>
    </head>
   <body>
@@ -24,7 +24,7 @@
 			<nav class="nav nav-tabs flex-column flex-sm-row row justify-content-start">
 				{% block navigation %}
 				<a class="flex-sm-fill text-sm-center nav-link active" href="{% url 'Start Page' %}">Start page</a>
-				<a class="flex-sm-fill text-sm-center nav-link" href="#">Store promotions</a>
+				<a class="flex-sm-fill text-sm-center nav-link" href="{% url 'product:store_offers' %}">Store</a>
 				<a class="flex-sm-fill text-sm-center nav-link" href="#">Payment and Delivery</a>
 				<a class="flex-sm-fill text-sm-center nav-link" href="#">About us</a>
 				{% endblock navigation %}

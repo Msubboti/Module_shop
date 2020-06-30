@@ -2,11 +2,45 @@
 
 {% block title %}Products{% endblock title %}
 
+{% block navigation %}
+				<a class="flex-sm-fill text-sm-center nav-link" href="{% url 'Start Page' %}">Start page</a>
+				<a class="flex-sm-fill text-sm-center nav-link active" href="{% url 'product:store_offers' %}">Store</a>
+				<a class="flex-sm-fill text-sm-center nav-link" href="#">Payment and Delivery</a>
+				<a class="flex-sm-fill text-sm-center nav-link" href="#">About us</a>
+				{% endblock navigation %}
+
+
 {% block Main_page %}
-    <h2>Publishers</h2>
-    <ul>
+    <div class="row p-4">
+        <h2>Assortment</h2>
+    </div>
+    <div class="row">
         {% for item in object_list %}
-            <li>{{ item.name }}</li>
+        <div id="item" class="col-sm-3 p-1" >
+            <div class="image">
+                <img class="image" src="/{{ MEDIA_URL }}{{ item.image }}" width="125" height="125" alt="{{item.name}}">
+                <h4> {{ item.name }} </h4>
+                    <p>Prise: {{ item.price }}</p>
+                    {% if item.amount > 0 %}
+                        <p style="color: green;">Available for order</p>
+                        {% if user.is_authenticated and user.username != 'admin' %}
+                        <form action="{% url 'product:store_offers' %}" method="post">
+                            {% csrf_token %}
+                            <label class="p-2" for="quantity">Quantity :</label><input id="quantity" type="text" placeholder="Max {{ item.amount}}">
+                            <button type="button" class="btn btn-info p-1" value="{{ item.name }}">Buy</button>
+                        </form>
+                        {% elif user.is_authenticated and user.username == 'admin' %}
+                            <form method="LINK" action="{% url 'product:edit_item' item.id %}">
+                                <button type="submit">Edit</button>
+                            </form>
+                        {% endif %}
+                    {% else%}
+                        <p style="color: red;">Not available</p>
+                    {% endif %}
+            </div>
+
+        </div>
         {% endfor %}
-    </ul>
+    </div>
+
 {% endblock Main_page %}

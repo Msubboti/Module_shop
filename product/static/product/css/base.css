@@ -9,6 +9,7 @@ body,html{
 
 .container-fluid{
 	height: 100%;
+	width:100%;
 }
 
 
@@ -22,17 +23,14 @@ body,html{
 
 #Header{
     height:20%;
+    width:100%;
 }
 
 
 
 #body_page{
     height:55%;
-}
-
-
-#item{
-    height:100%;
+    width:100%;
 }
 
 #Footer{
@@ -41,4 +39,12 @@ body,html{
 
 .whitespace-prewrap {
     whitespace: prewrap;
+}
+
+.image {
+    text-align: center;
+}
+
+#size{
+    width: 35%;
 }

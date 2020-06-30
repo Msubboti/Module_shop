@@ -14,8 +14,9 @@ class TimeStampModel(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=30)
+    image = models.ImageField(blank=True, null=True, upload_to='media/product/images/')
     description = models.TextField(blank=True, null=True)
-    price = models.IntegerField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     amount = models.IntegerField()
 
     def __str__(self):

@@ -1,0 +1,16 @@
+{% extends  'product/base.html' %}
+
+{% block title %}Edit Item{% endblock title %}
+
+
+{% block Main_page %}
+    <br><br>
+    <h1>Hello</h1>
+    <form class="container" action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form }}
+        </table>
+        <button class="btn btn-primary">Confirm</button>
+    </form>
+{% endblock Main_page %}
