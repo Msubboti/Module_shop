@@ -24,9 +24,25 @@ class Product(models.Model):
 
 
 class Purchase(TimeStampModel):
+    NEW = 1
+    REVIEW = 2
+    REJECTED = 3
+    APPROVED = 4
+
+    statuses = (
+        (NEW, 'NEW'),
+        (REVIEW, 'REVIEW'),
+        (REJECTED, 'REJECTED'),
+        (APPROVED, 'APPROVED'),
+    )
+
     user = models.ForeignKey(USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
     amount = models.IntegerField()
+    status = models.SmallIntegerField(choices=statuses)
+
+    def __str__(self):
+        return "{}".format(self.created_at)
 
 
 class ItemsBack(TimeStampModel):

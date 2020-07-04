@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product
+from .models import Product, Purchase, ItemsBack
 
 
 class QuantityForm(forms.Form):
@@ -20,3 +20,21 @@ class ItemUpdatingForm(forms.ModelForm):
         model = Product
         fields = ('price', 'amount')
 
+
+class ProductForm(forms.ModelForm):
+
+    class Meta:
+        model = Product
+        fields = ('name', 'image', 'description', 'price', 'amount')
+
+
+class PurchaseForm(forms.ModelForm):
+    class Meta:
+        model = Purchase
+        fields = ('amount', 'product')
+
+
+class ItemsBackForm(forms.ModelForm):
+    class Meta:
+        model = ItemsBack
+        fields = ('item',)

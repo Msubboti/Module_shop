@@ -1,0 +1,23 @@
+{% extends  'product/base.html' %}
+
+{% block title %}Products{% endblock title %}
+
+{% block navigation %}
+    <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'Start Page' %}">Start page</a>
+    <a class="flex-sm-fill text-sm-center nav-link active" href="{% url 'product:store_offers' %}">Store</a>
+    <a class="flex-sm-fill text-sm-center nav-link" href="#">My purchases</a>
+{% endblock navigation %}
+
+
+{% block Main_page %}
+
+    <br><br>
+    <form class="container" action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form }}
+        </table>
+        <button class="btn btn-primary">Buy</button>
+    </form>
+
+{% endblock Main_page %}

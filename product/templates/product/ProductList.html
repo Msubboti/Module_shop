@@ -5,12 +5,27 @@
 {% block navigation %}
 				<a class="flex-sm-fill text-sm-center nav-link" href="{% url 'Start Page' %}">Start page</a>
 				<a class="flex-sm-fill text-sm-center nav-link active" href="{% url 'product:store_offers' %}">Store</a>
-				<a class="flex-sm-fill text-sm-center nav-link" href="#">Payment and Delivery</a>
-				<a class="flex-sm-fill text-sm-center nav-link" href="#">About us</a>
+				{% if user.username == 'admin' %}
+					<a class="flex-sm-fill text-sm-center nav-link" href="{% url 'product:new_product' %}">New product</a>
+					<a class="flex-sm-fill text-sm-center nav-link" href="{% url 'product:returning_list' %}">Purchase returns</a>
+				{% elif user.is_authenticated and user.username != 'admin' %}
+					<a class="flex-sm-fill text-sm-center nav-link" href="{% url 'product:my_purchases' %}">My purchases</a>
+                {% else %}
+				    <a class="flex-sm-fill text-sm-center nav-link" href="#">Promotions</a>
+				    <a class="flex-sm-fill text-sm-center nav-link" href="#">Payment and Delivery</a>
+				    <a class="flex-sm-fill text-sm-center nav-link" href="#">About as</a>
+				{% endif %}
 				{% endblock navigation %}
 
 
 {% block Main_page %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li style="color:green;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <div class="row p-4">
         <h2>Assortment</h2>
     </div>
@@ -20,23 +35,26 @@
             <div class="image">
                 <img class="image" src="/{{ MEDIA_URL }}{{ item.image }}" width="125" height="125" alt="{{item.name}}">
                 <h4> {{ item.name }} </h4>
-                    <p>Prise: {{ item.price }}</p>
+                    <p>Price: {{ item.price }}</p>
                     {% if item.amount > 0 %}
                         <p style="color: green;">Available for order</p>
-                        {% if user.is_authenticated and user.username != 'admin' %}
-                        <form action="{% url 'product:store_offers' %}" method="post">
-                            {% csrf_token %}
-                            <label class="p-2" for="quantity">Quantity :</label><input id="quantity" type="text" placeholder="Max {{ item.amount}}">
-                            <button type="button" class="btn btn-info p-1" value="{{ item.name }}">Buy</button>
-                        </form>
-                        {% elif user.is_authenticated and user.username == 'admin' %}
-                            <form method="LINK" action="{% url 'product:edit_item' item.id %}">
-                                <button type="submit">Edit</button>
-                            </form>
-                        {% endif %}
                     {% else%}
                         <p style="color: red;">Not available</p>
                     {% endif %}
+                    {% if user.is_authenticated and user.username != 'admin' %}
+                        <form action="{% url 'product:new_purchase' item.id %}" method="post">
+                            {% csrf_token %}
+                            <label class="p-2" for="amount">Quantity :</label>
+                            <input type="hidden" name="product" value="{{ item.id }}">
+                            <input id="amount" type="text" name="amount" placeholder="Max {{ item.amount}}">
+                            <button class="btn btn-warning">Buy</button>
+                        </form>
+                    {% elif user.is_authenticated and user.username == 'admin' %}
+                        <form method="LINK" action="{% url 'product:edit_item' item.id %}">
+                            <button type="submit">Edit</button>
+                        </form>
+                    {% endif %}
+
             </div>
 
         </div>
@@ -44,3 +62,7 @@
     </div>
 
 {% endblock Main_page %}
+
+{% block footer%}
+
+{% endblock footer %}

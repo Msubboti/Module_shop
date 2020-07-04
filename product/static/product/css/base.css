@@ -1,10 +1,12 @@
-body,html{
+html, body{
 	background-color:yellow;
 	width: 100%;
 	height:100%;
 	margin:0;
 	background: rgb(2,0,36);
     background: linear-gradient(0.25turn, #540383, #ce320b, #e9890b);
+    position: relative;
+    min-height:100%;
 }
 
 .container-fluid{
@@ -26,15 +28,17 @@ body,html{
     width:100%;
 }
 
-
-
 #body_page{
     height:55%;
     width:100%;
 }
 
 #Footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
     height:20%;
+    text-align: center;
 }
 
 .whitespace-prewrap {
@@ -47,4 +51,46 @@ body,html{
 
 #size{
     width: 35%;
+}
+
+.table{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+.Date_header, .Product_header, .Amount_header, .Action_header{
+    background: #2e82c3;
+    border-radius: 10px;
+}
+
+.Date_row{
+    width: 15%;
+    background: #e6ebee;
+    border-radius: 10px;
+}
+
+.Product_row{
+    width: 45%;
+    background: #e6ebee;
+    border-radius: 10px;
+}
+
+.Amount_row{
+    width: 20%;
+    text-align: center;
+    background: #e6ebee;
+    border-radius: 10px;
+}
+
+.Action_row{
+    width: 20%;
+    text-align: center;
+    background: #e6ebee;
+    border-radius: 10px;
+}
+
+
+.answer{
+    text-align: center;
 }

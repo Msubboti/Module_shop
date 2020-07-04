@@ -1,0 +1,52 @@
+{% extends  'product/base.html' %}
+
+{% block title %}My purchases{% endblock title %}
+
+{% block navigation %}
+<a class="flex-sm-fill text-sm-center nav-link" href="{% url 'Start Page' %}">Start page</a>
+<a class="flex-sm-fill text-sm-center nav-link" href="{% url 'product:store_offers' %}">Store</a>
+<a class="flex-sm-fill text-sm-center nav-link" href="{% url 'product:new_product' %}">New product</a>
+<a class="flex-sm-fill text-sm-center nav-link active" href="{% url 'product:returning_list' %}">Purchase returns</a>
+{% endblock navigation %}
+
+
+{% block Main_page %}
+    <div class="row p-4 col-sm-12">
+        {% if object_list %}
+            <table class="table">
+            <caption>Returning list</caption>
+                <tr style="text-align: center;">
+                    <th class="Date_header">Date</th>
+                    <th class="Product_header">Product</th>
+                    <th class="Amount_header">Amount</th>
+                    <th class="Action_header">Action</th>
+                </tr>
+                {% for returns in object_list %}
+                <tr>
+                    <td class="Date_row">{{ returns.created_at }}</td>
+                    <td class="Product_row">{{ returns.item.product.name }}</td>
+                    <td class="Amount_row">{{ returns.item.amount }}</td>
+                    <td class="Action_row">
+                        <div class="d-sm-flex justify-content-center">
+                        <form action="{% url 'product:deleting_returns' returns.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="approval" value="{{ returns.id }}">
+                            <button class="btn btn-outline-danger">Approve</button>
+                        </form>
+                        <form action="{% url 'product:deleting_returns' returns.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="rejected" value="{{ returns.id }}">
+                            <button class="btn btn-outline-success">Reject</button>
+                        </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <h4 class="col-sm-12 answer">List of returns is empty. Congratulation!!!</h4>
+           
+        {% endif %}
+    </div>
+
+{% endblock Main_page %}
