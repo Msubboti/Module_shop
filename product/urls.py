@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from .views import ProductList, ItemUpdate, CreateNewProduct, CreatingPurchases, PurchaseList, ReturnPurchase, ReturningList, QueryApproval
 
 app_name = 'product'
+
 
 urlpatterns = [
     path('', ProductList.as_view(template_name="product/ProductList.html"), name='store_offers'),

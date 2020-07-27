@@ -6,7 +6,6 @@ from datetime import timedelta
 from django.utils import timezone
 
 
-
 from .models import Product, Purchase, ItemsBack
 from users.models import User
 from .forms import ItemUpdatingForm, ProductForm, PurchaseForm, ItemsBackForm
